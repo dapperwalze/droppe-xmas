@@ -1,0 +1,55 @@
+$bg-color: rgba(237, 242, 254, 1);
+$color: rgba(0, 0, 0, 1);
+$primary-font-family: "Work Sans", sans-serif;
+$secondary-font-family: "Lobster", sans-serif;
+$primary-font-Size: 1rem;
+$font-weight: 500;
+$line-height: 20px;
+
+.aside {
+  min-height: 100vh;
+  background-color: $bg-color;
+  color: $color;
+  font-family: $primary-font-family;
+  line-height: $line-height;
+  padding: 0 30px 100px 30px;
+}
+.logoContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 40px 0;
+}
+.logo {
+  font-family: $secondary-font-family;
+  font-size: 2.5rem;
+  font-weight: $font-weight;
+
+  .xmasColor {
+    color: rgba(0, 132, 59, 1);
+  }
+}
+.sideNavBar {
+  padding-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.navLink {
+  width: 100%;
+  text-decoration: none;
+  color: rgba(52, 61, 72, 1);
+  font-size: 1.0625rem;
+  font-weight: 400;
+  &:hover {
+    margin-left: 5px;
+    transition: ease 0.5s;
+  }
+}
+.listItem {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px 20px;
+  border-radius: 10px;
+}

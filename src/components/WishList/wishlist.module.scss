@@ -1,0 +1,116 @@
+$primary-font-family: "Work Sans", sans-serif;
+$primary-font-Size: 1.25rem;
+$font-weight: 500;
+$line-height: 20px;
+
+.wishListCard {
+  margin-bottom: 20px;
+}
+.wishListHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  // background-color: rgba(161, 104, 187, 1);
+  background-color: rgba(127, 203, 188, 1);
+  border-top-right-radius: 7px;
+  border-top-left-radius: 7px;
+  color: rgba(255, 255, 255, 1);
+  font-size: 1rem;
+  font-weight: 400;
+  cursor: pointer;
+}
+.wishListToggler {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 1);
+  font-family: $primary-font-family;
+  line-height: $line-height;
+  font-size: 0.875rem;
+}
+
+.wishListContent {
+  padding: 10px 10px 15px 10px;
+  box-shadow: 2px 4px 12px rgb(0 0 0 / 8%);
+  transition: all 0.3s cubic-bezier(0, 0, 0.5, 1);
+  border-bottom-right-radius: 7px;
+  border-bottom-left-radius: 7px;
+
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+  li {
+    margin-top: 10px;
+  }
+}
+.listItem {
+  width: 100%;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+}
+
+.productTitle::first-letter {
+  text-transform: capitalize;
+}
+.productPrice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.productTitle,
+.productPrice {
+  font-size: 0.875rem;
+}
+.discardBtnContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.approveBtnContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0 0px 0;
+}
+
+.discardBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 0.8125rem;
+}
+.approveBtn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(38, 171, 95, 1);
+  background-color: rgba(127, 203, 188, 1);
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-family: $primary-font-family;
+  font-size: 0.875rem;
+  font-weight: $font-weight;
+  padding: 10px;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 1);
+    color: rgba(255, 255, 255, 1);
+    transition: ease 0.5s;
+  }
+}
+.approveBtn {
+  color: rgba(255, 255, 255, 1);
+}
+.discardBtn {
+  color: rgba(253, 52, 102, 1);
+}

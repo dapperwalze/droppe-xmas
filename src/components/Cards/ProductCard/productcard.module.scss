@@ -4,49 +4,6 @@ $primary-font-Size: 1.25rem;
 $font-weight: 500;
 $line-height: 20px;
 
-.marketPlace {
-  width: 100%;
-  height: auto;
-  font-family: $primary-font-family;
-  line-height: $line-height;
-  h2 {
-    font-weight: $font-weight;
-  }
-}
-
-.categoryRow {
-  width: 100%;
-  height: auto;
-  margin-bottom: 50px;
-}
-.categoryHeader {
-  width: 100%;
-  height: auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.categoryHeader h3 {
-  display: inline-flex;
-  color: rgba(52, 61, 72, 1);
-  font-weight: $font-weight;
-}
-.viewMoreLink a {
-  text-decoration: none;
-  color: rgba(116, 109, 153, 1);
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-.productGallery {
-  width: 100%;
-  height: auto;
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 1fr;
-  gap: 20px;
-  margin-top: 30px;
-}
 .productCard {
   border-radius: 5px;
   &:hover {

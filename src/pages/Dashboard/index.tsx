@@ -1,7 +1,23 @@
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { walletSelector } from "../../redux/reducers/walletReducer";
+import { wishlistsSelector } from "../../redux/reducers/wishlistsReducer";
 import styles from "./dashboard.module.scss";
+import { handleCurrencyFormatting } from "./../../utils/helpers";
+import { useEffect } from "react";
+import { fetchCarts } from "../../redux/actions/wishlistsActions";
 
 const Dashboard = () => {
+  const { carts, isLoading } = useSelector(wishlistsSelector);
+  const { walletBalance } = useSelector(walletSelector);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCarts());
+  }, [dispatch]);
+
+  const activeWishLists = carts.length;
+
   return (
     <div className={styles.container}>
       <h2 className={styles.welcomeGreeting}>Hello, Walter.</h2>
@@ -14,7 +30,9 @@ const Dashboard = () => {
             </span>
             <span>Active Wishlists</span>
           </span>
-          <span className={styles.cardContentCount}>10</span>
+          <span className={styles.cardContentCount}>
+            {isLoading ? "..." : `${activeWishLists}`}
+          </span>
         </div>
 
         <div className={styles.wishlistCard}>
@@ -41,8 +59,10 @@ const Dashboard = () => {
       <section className={styles.secondRow}>
         <div className={styles.walletCard}>
           <span className={styles.walletHeader}>Wallet Balance</span>
-          <span className={styles.walletValue}>$ 6000.00</span>
-          <Link to="/deposit-funds" className={styles.walletCTA}>
+          <span className={styles.walletValue}>
+            {handleCurrencyFormatting(walletBalance)}
+          </span>
+          <Link to="/wallet" className={styles.walletCTA}>
             Top Up
           </Link>
         </div>

@@ -1,19 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
 import WishList from "../../components/WishList";
-import { cartsSelector } from "../../redux/reducers/cartsReducer";
+import { wishlistsSelector } from "../../redux/reducers/wishlistsReducer";
 import styles from "./wishlists.module.scss";
-import { fetchCarts } from "./../../redux/actions/cartsActions";
+import { fetchCarts } from "../../redux/actions/wishlistsActions";
 import { useEffect } from "react";
 
 const WishLists = () => {
-  const { carts } = useSelector(cartsSelector);
+  const { carts, isLoading } = useSelector(wishlistsSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchCarts());
   }, [dispatch]);
 
-  console.log(carts);
+  console.log({ carts });
+  console.log({ isLoading });
 
   const mockApi = [
     {

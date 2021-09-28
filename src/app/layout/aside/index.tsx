@@ -34,10 +34,10 @@ const DroppeXmasAside = () => {
       id: 4,
       name: (
         <span className={styles.listItem}>
-          <i className="ri-wallet-line" /> Deposit Funds
+          <i className="ri-wallet-line" /> Wallet
         </span>
       ),
-      location: "./deposit-funds",
+      location: "./wallet",
     },
     {
       id: 5,

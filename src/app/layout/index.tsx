@@ -4,7 +4,7 @@ import DroppeXmasAside from "./aside";
 import DroppeXmasContent from "./content";
 import MarketPlace from "./../../pages/MarketPlace/index";
 import WishLists from "./../../pages/WishLists/index";
-import DepositFunds from "./../../pages/DepositFunds/index";
+import Wallet from "../../pages/Wallet/index";
 import UserSettings from "./../../pages/Settings/index";
 import styles from "./droppexmaslayout.module.scss";
 
@@ -23,8 +23,8 @@ export const DroppeXmasLayout = () => {
           <Route exact path="/wish-lists">
             <WishLists />
           </Route>
-          <Route exact path="/deposit-funds">
-            <DepositFunds />
+          <Route exact path="/wallet">
+            <Wallet />
           </Route>
           <Route exact path="/user-settings">
             <UserSettings />

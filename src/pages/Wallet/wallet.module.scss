@@ -1,0 +1,52 @@
+$color: rgba(136, 136, 136, 1);
+$primary-font-family: "Work Sans", sans-serif;
+$primary-font-Size: 1.25rem;
+$font-weight: 500;
+$line-height: 20px;
+
+.container {
+  width: 100%;
+  height: auto;
+  padding-bottom: 30px;
+}
+.header {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  h2 {
+    font-family: $primary-font-family;
+    line-height: $line-height;
+    font-weight: $font-weight;
+  }
+}
+.walletBalanceBlock {
+  color: rgba(52, 61, 72, 1);
+  font-family: $primary-font-family;
+  font-weight: 400;
+  line-height: $line-height;
+  .walletBalance {
+    font-size: $primary-font-Size;
+    margin-left: 5px;
+  }
+}
+.transactionFailure {
+  color: rgba(240, 50, 97, 1);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-family: $primary-font-family;
+  font-weight: 400;
+  font-size: 1rem;
+}
+.transactionSuccess {
+  color: rgba(38, 171, 95, 1);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  font-family: $primary-font-family;
+  font-weight: 400;
+  font-size: 1.2rem;
+}

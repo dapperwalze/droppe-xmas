@@ -39,9 +39,9 @@ const WishList = (props: WishListProps) => {
       >
         <ul>
           {products?.map((product: Record<string, any>) => (
-            <li key={product.productId} className={styles.listItem}>
+            <li key={product.id} className={styles.listItem}>
               <span className={styles.productTitle}>{product?.title} </span>
-              <span className={styles.productPrice}>${product?.price}</span>
+              <span className={styles.productPrice}>€{product?.price}</span>
               <span className={styles.discardBtnContainer}>
                 <button className={styles.discardBtn} type="button">
                   Discard

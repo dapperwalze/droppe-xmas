@@ -21,10 +21,12 @@ export function fetchCarts() {
     dispatch(getCarts());
 
     try {
-      axios.get("https://fakestoreapi.com/carts?limit=5").then((response) => {
-        const { data } = response;
-        dispatch(getCartsSuccess(data));
-      });
+      axios
+        .get("https://fakestoreapi.com/products?limit=5")
+        .then((response) => {
+          const { data } = response;
+          dispatch(getCartsSuccess(data));
+        });
     } catch (error) {
       dispatch(getCartsFailure());
     }

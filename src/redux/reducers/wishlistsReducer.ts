@@ -1,12 +1,12 @@
-import * as actions from "../actions/cartsActions";
+import * as actions from "../actions/wishlistsActions";
 
-interface cartsState {
+interface wishlistsState {
   carts: Record<string, any>[];
   isLoading: boolean;
   hasErrors: boolean;
 }
 
-const initialState: cartsState = {
+const initialState: wishlistsState = {
   carts: [],
   isLoading: false,
   hasErrors: false,
@@ -17,7 +17,7 @@ export type Action = {
   payload?: any;
 };
 
-const cartsReducer = (state = initialState, action: Action) => {
+const wishlistsReducer = (state = initialState, action: Action) => {
   switch (action.type) {
     case actions.GET_CARTS:
       return { ...state, isLoading: true };
@@ -29,6 +29,6 @@ const cartsReducer = (state = initialState, action: Action) => {
       return state;
   }
 };
-export const cartsSelector = (state: { carts: any }) => state.carts;
+export const wishlistsSelector = (state: { wishlists: any }) => state.wishlists;
 
-export default cartsReducer;
+export default wishlistsReducer;

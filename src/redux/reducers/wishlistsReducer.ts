@@ -18,21 +18,14 @@ export type Action = {
 };
 
 const wishlistsReducer = (state = initialState, action: Action) => {
+  const clonedCart = [...state.carts];
   const cartId = action.payload?.cartId;
-  const cartIndex = state.carts.findIndex((cart) => cart?.id === cartId);
-  const getCart = state.carts[cartIndex];
-  const getProducts = getCart?.products?.filter(
+  const cartIndex = clonedCart.findIndex((cart) => cart?.id === cartId);
+  clonedCart[cartIndex] = { ...clonedCart[cartIndex] };
+  clonedCart[cartIndex].products = clonedCart[cartIndex].products?.filter(
     (product: Record<string, any>) =>
       product.productId !== action.payload?.productId
   );
-  const filteredResult = state.carts.filter(
-    (cart: Record<string, any>) => cart?.id !== cartId && getProducts
-  );
-  console.log({ cartIndex });
-  console.log({ cartId });
-  console.log({ getCart });
-  console.log({ getProducts });
-  console.log({ filteredResult });
 
   switch (action.type) {
     case actions.GET_WISHLISTS:
@@ -42,8 +35,10 @@ const wishlistsReducer = (state = initialState, action: Action) => {
     case actions.GET_WISHLISTS_FAILURE:
       return { ...state, isLoading: false, hasErrors: true };
     case actions.DELETE_FROM_WISHLIST:
-      return Object.assign({}, state, { carts: filteredResult });
-
+      return {
+        ...state,
+        carts: clonedCart,
+      };
     default:
       return state;
   }

@@ -1,34 +1,51 @@
 import axios from "axios";
-export const GET_CARTS = "GET_CARTS";
-export const GET_CARTS_SUCCESS = "GET_CARTS_SUCCESS";
-export const GET_CARTS_FAILURE = "GET_CARTS_FAILURE";
 
-export const getCarts = () => ({
-  type: GET_CARTS,
+export const GET_WISHLISTS = "GET_WISHLISTS";
+export const GET_WISHLISTS_SUCCESS = "GET_WISHLISTS_SUCCESS";
+export const GET_WISHLISTS_FAILURE = "GET_WISHLISTS_FAILURE";
+export const DELETE_FROM_WISHLIST = "DELETE_FROM_WISHLIST";
+
+export const getWishLists = () => ({
+  type: GET_WISHLISTS,
 });
 
-export const getCartsSuccess = (carts: Record<string, any>[]) => ({
-  type: GET_CARTS_SUCCESS,
+export const getWishListsSuccess = (carts: Record<string, any>[]) => ({
+  type: GET_WISHLISTS_SUCCESS,
   payload: carts,
 });
 
-export const getCartsFailure = () => ({
-  type: GET_CARTS_FAILURE,
+export const getWishListsFailure = () => ({
+  type: GET_WISHLISTS_FAILURE,
+});
+
+export const deleteFromWishList = (cartId: number, productId: number) => ({
+  type: DELETE_FROM_WISHLIST,
+  payload: {
+    cartId,
+    productId,
+  },
 });
 
 export function fetchCarts() {
   return async (dispatch: (arg: any) => any) => {
-    dispatch(getCarts());
+    dispatch(getWishLists());
 
     try {
-      axios
-        .get("https://fakestoreapi.com/products?limit=5")
+      await axios
+        .get("https://fakestoreapi.com/carts?limit=5")
         .then((response) => {
           const { data } = response;
-          dispatch(getCartsSuccess(data));
+          dispatch(getWishListsSuccess(data));
         });
-    } catch (error) {
-      dispatch(getCartsFailure());
+    } catch (error: any) {
+      if (error.response) {
+        dispatch(getWishListsFailure());
+      } else if (error.request) {
+        dispatch(getWishListsFailure());
+      } else {
+        dispatch(getWishListsFailure());
+      }
+      console.log(error);
     }
   };
 }

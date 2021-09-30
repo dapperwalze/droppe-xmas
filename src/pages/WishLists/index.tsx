@@ -1,147 +1,42 @@
 import { useDispatch, useSelector } from "react-redux";
 import WishList from "../../components/WishList";
+import { allProductsSelector } from "../../redux/reducers/allProductsReducer";
 import { wishlistsSelector } from "../../redux/reducers/wishlistsReducer";
 import styles from "./wishlists.module.scss";
 import { fetchCarts } from "../../redux/actions/wishlistsActions";
 import { useEffect } from "react";
+import { getAllProducts } from "./../../redux/actions/productActions";
 
 const WishLists = () => {
-  const { carts, isLoading } = useSelector(wishlistsSelector);
+  const { allProducts } = useSelector(allProductsSelector);
+  const { carts, hasErrors, isLoading } = useSelector(wishlistsSelector);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchCarts());
+    dispatch(getAllProducts());
   }, [dispatch]);
 
-  console.log({ carts });
-  console.log({ isLoading });
+  const renderWishlists = () => {
+    if (isLoading) return <>loading...</>;
 
-  const mockApi = [
-    {
-      id: 1,
-      userId: 1,
-      userName: "Herik",
-      products: [
-        {
-          id: 1,
-          title: "play station",
-          price: "700",
-        },
-        {
-          id: 2,
-          title: "yeezy boost",
-          price: "1500",
-        },
-        {
-          id: 3,
-          title: "Macbook",
-          price: "1700",
-        },
-      ],
-    },
-    {
-      id: 2,
-      userId: 1,
-      userName: "Sophia",
-      products: [
-        {
-          id: 1,
-          title: "play station",
-          price: "700",
-        },
-        {
-          id: 2,
-          title: "yeezy boost",
-          price: "1500",
-        },
-        {
-          id: 3,
-          title: "Macbook",
-          price: "1700",
-        },
-      ],
-    },
-    {
-      id: 3,
-      userId: 1,
-      userName: "Carl",
-      products: [
-        {
-          id: 1,
-          title: "play station",
-          price: "700",
-        },
-        {
-          id: 2,
-          title: "yeezy boost",
-          price: "1500",
-        },
-        {
-          id: 3,
-          title: "Macbook",
-          price: "1700",
-        },
-      ],
-    },
-    {
-      id: 4,
-      userId: 1,
-      userName: "Cassandra",
-      products: [
-        {
-          id: 1,
-          title: "play station",
-          price: "700",
-        },
-        {
-          id: 2,
-          title: "yeezy boost",
-          price: "1500",
-        },
-        {
-          id: 3,
-          title: "Macbook",
-          price: "1700",
-        },
-        {
-          id: 4,
-          title: "airpods",
-          price: "200",
-        },
-      ],
-    },
-    {
-      id: 5,
-      userId: 1,
-      userName: "Rose",
-      products: [
-        {
-          id: 1,
-          title: "play station",
-          price: "700",
-        },
-        {
-          id: 2,
-          title: "yeezy boost",
-          price: "1500",
-        },
-        {
-          id: 3,
-          title: "Macbook",
-          price: "1700",
-        },
-      ],
-    },
-  ];
+    if (hasErrors)
+      return (
+        <p>
+          Couldn't fetch wishlists, please check your connection and try again.
+        </p>
+      );
+    return carts?.map((cart: Record<string, any>) => (
+      <WishList key={cart.id} cart={cart} allProducts={allProducts} />
+    ));
+  };
+
   return (
     <div className={styles.container}>
       <h2>Wish Lists</h2>
 
-      <div className={styles.row}>
-        {mockApi?.map((cart: Record<string, any>) => (
-          <WishList key={cart.id} cart={cart} />
-        ))}
-      </div>
+      <div className={styles.row}>{renderWishlists()}</div>
     </div>
   );
 };

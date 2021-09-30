@@ -6,6 +6,7 @@ import styles from "./dashboard.module.scss";
 import { handleCurrencyFormatting } from "./../../utils/helpers";
 import { useEffect } from "react";
 import { fetchCarts } from "../../redux/actions/wishlistsActions";
+import { getAllProducts } from "../../redux/actions/productActions";
 
 const Dashboard = () => {
   const { carts, isLoading } = useSelector(wishlistsSelector);
@@ -14,6 +15,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(fetchCarts());
+    dispatch(getAllProducts());
   }, [dispatch]);
 
   const activeWishLists = carts.length;

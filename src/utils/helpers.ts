@@ -1,6 +1,6 @@
 export const handleCurrencyFormatting = (amount: number) => {
-  return new Intl.NumberFormat("fi-FI", {
+  return new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "EUR",
+    currency: "USD",
   }).format(amount);
 };

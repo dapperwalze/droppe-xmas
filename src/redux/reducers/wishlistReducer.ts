@@ -1,14 +1,12 @@
 import * as actions from "../actions/wishlistActions";
 
 interface wishlistState {
-  approvedWishlist: Record<string, any>[];
-  isLoading: boolean;
+  approvedWishlists: Record<string, any>[];
   hasErrors: boolean;
 }
 
 const initialState: wishlistState = {
-  approvedWishlist: [],
-  isLoading: false,
+  approvedWishlists: [],
   hasErrors: false,
 };
 
@@ -20,17 +18,20 @@ export type Action = {
 const wishlistReducer = (state = initialState, action: Action) => {
   switch (action.type) {
     case actions.APPROVE_WISHLIST:
-      return { ...state, isLoading: true };
-    // case actions.GET_WISHLISTS_SUCCESS:
-    //   return { carts: action.payload, isLoading: false, hasErrors: false };
-    // case actions.GET_WISHLISTS_FAILURE:
-    //   return { ...state, isLoading: false, hasErrors: true };
+    case actions.APPROVE_WISHLIST_SUCCESS:
+      return {
+        ...state,
+        approvedWishlists: state.approvedWishlists.concat(action.payload),
+        hasErrors: false,
+      };
+    case actions.APPROVE_WISHLIST_FAILURE:
+      return { ...state, hasErrors: true };
 
     default:
       return state;
   }
 };
-export const wishlistSelector = (state: { approvedWishlist: any }) =>
-  state.approvedWishlist;
+export const wishlistSelector = (state: { approvedWishlists: any }) =>
+  state.approvedWishlists;
 
 export default wishlistReducer;

@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import styles from "./wishlist.module.scss";
 import { handleCurrencyFormatting } from "./../../utils/helpers";
 import { deleteFromWishList } from "../../redux/actions/wishlistsActions";
+import { approveWishlist } from "../../redux/actions/wishlistActions";
 
 interface WishListProps {
   cart: Record<string, any>;
@@ -11,7 +12,7 @@ interface WishListProps {
 
 const WishList = (props: WishListProps) => {
   const { cart, allProducts } = props;
-  const { products } = cart;
+  const { products, id } = cart;
   const [isWishListOpen, setIsWishListOpen] = useState(false);
 
   const dispatch = useDispatch();
@@ -27,64 +28,78 @@ const WishList = (props: WishListProps) => {
     [dispatch]
   );
 
-  return (
-    <div className={styles.wishListCard}>
-      <div className={styles.wishListHeader} onClick={handleToggle}>
-        <span className={styles.userName}>User ID: {cart.id}</span>
-        <button type="button" className={styles.wishListToggler}>
-          {isWishListOpen ? (
-            <>
-              <i className="ri-arrow-up-s-fill" />
-            </>
-          ) : (
-            <>
-              <i className="ri-arrow-down-s-fill" />
-            </>
-          )}
-        </button>
-      </div>
+  const handleWishlistApproval = useCallback(
+    (cart) => {
+      dispatch(approveWishlist(cart));
+    },
+    [dispatch]
+  );
 
+  return (
+    <>
       <div
-        className={styles.wishListContent}
-        style={{
-          display: isWishListOpen ? "block" : "none",
-        }}
+        className={styles.wishListCard}
+        style={{ display: products.length > 0 ? "block" : "none" }}
       >
-        <ul>
-          {products?.map((product: Record<string, any>) => {
-            let productMatch = allProducts?.find(
-              (item: Record<string, any>) => item?.id === product?.productId
-            );
-            return (
-              <li key={product.productId} className={styles.listItem}>
-                <span className={styles.productTitle}>
-                  {productMatch?.title}
-                </span>
-                <span className={styles.productPrice}>
-                  {handleCurrencyFormatting(productMatch?.price)}
-                </span>
-                <span className={styles.discardBtnContainer}>
-                  <button
-                    className={styles.discardBtn}
-                    type="button"
-                    onClick={() =>
-                      handleDiscardItem(cart.id, product?.productId)
-                    }
-                  >
-                    Discard
-                  </button>
-                </span>
-              </li>
-            );
-          })}
-        </ul>
-        <div className={styles.approveBtnContainer}>
-          <button className={styles.approveBtn} type="button">
-            Approve
+        <div className={styles.wishListHeader} onClick={handleToggle}>
+          <span className={styles.userName}>User ID: {id}</span>
+          <button type="button" className={styles.wishListToggler}>
+            {isWishListOpen ? (
+              <>
+                <i className="ri-arrow-up-s-fill" />
+              </>
+            ) : (
+              <>
+                <i className="ri-arrow-down-s-fill" />
+              </>
+            )}
           </button>
         </div>
+
+        <div
+          className={styles.wishListContent}
+          style={{
+            display: isWishListOpen ? "block" : "none",
+          }}
+        >
+          <ul>
+            {products?.map((product: Record<string, any>) => {
+              let productMatch = allProducts?.find(
+                (item: Record<string, any>) => item?.id === product?.productId
+              );
+              return (
+                <li key={product.productId} className={styles.listItem}>
+                  <span className={styles.productTitle}>
+                    {productMatch?.title}
+                  </span>
+                  <span className={styles.productPrice}>
+                    {handleCurrencyFormatting(productMatch?.price)}
+                  </span>
+                  <span className={styles.discardBtnContainer}>
+                    <button
+                      className={styles.discardBtn}
+                      type="button"
+                      onClick={() => handleDiscardItem(id, product?.productId)}
+                    >
+                      Discard
+                    </button>
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+          <div className={styles.approveBtnContainer}>
+            <button
+              className={styles.approveBtn}
+              type="button"
+              onClick={() => handleWishlistApproval(cart)}
+            >
+              Approve
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 export default WishList;

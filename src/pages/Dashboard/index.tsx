@@ -7,10 +7,12 @@ import { handleCurrencyFormatting } from "./../../utils/helpers";
 import { useEffect } from "react";
 import { fetchCarts } from "../../redux/actions/wishlistsActions";
 import { getAllProducts } from "../../redux/actions/productActions";
+import { wishlistSelector } from "../../redux/reducers/wishlistReducer";
 
 const Dashboard = () => {
   const { carts, isLoading } = useSelector(wishlistsSelector);
   const { walletBalance } = useSelector(walletSelector);
+  const { approvedWishlists } = useSelector(wishlistSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -44,7 +46,9 @@ const Dashboard = () => {
             </span>
             <span>Total Requests</span>
           </span>
-          <span className={styles.cardContentCount}>30</span>
+          <span className={styles.cardContentCount}>
+            {isLoading ? "..." : `${activeWishLists}`}
+          </span>
         </div>
 
         <div className={styles.wishlistCard}>
@@ -54,7 +58,9 @@ const Dashboard = () => {
             </span>
             <span>Approved Requests</span>
           </span>
-          <span className={styles.cardContentCount}>15</span>
+          <span className={styles.cardContentCount}>
+            {approvedWishlists?.length}
+          </span>
         </div>
       </section>
 
@@ -71,28 +77,30 @@ const Dashboard = () => {
         <div className={styles.approvedListCard}>
           <div className={styles.listHeader}>
             <span className={styles.recentApproval}>Recent approvals</span>
-            <Link to="#" className={styles.viewMoreLink}>
+            <Link
+              to="#"
+              className={styles.viewMoreLink}
+              style={{ display: approvedWishlists < 1 ? "none" : "visible" }}
+            >
               View all
             </Link>
           </div>
 
           <ul className={styles.ulist}>
-            <li className={styles.approvedListItem}>
-              <div className={styles.listData}>
-                <span>Henrik Larson</span> <span>$140.23</span>
-              </div>
-              <div className={styles.itemCount}>
-                <span>Items: </span> 12
-              </div>
-            </li>
-            <li className={styles.approvedListItem}>
-              <div className={styles.listData}>
-                <span>Carl lenon</span> <span>$10.3</span>
-              </div>
-              <div className={styles.itemCount}>
-                <span>Items: </span> 1
-              </div>
-            </li>
+            {approvedWishlists.length < 1 ? (
+              <span>No wishlist has been approved</span>
+            ) : (
+              approvedWishlists.slice(0, 3).map((cart: Record<string, any>) => (
+                <li className={styles.approvedListItem}>
+                  <div className={styles.listData}>
+                    <span>User ID: {cart?.id} </span> <span>$140.23</span>
+                  </div>
+                  <div className={styles.itemCount}>
+                    <span>Items: </span> {cart?.products?.length}
+                  </div>
+                </li>
+              ))
+            )}
           </ul>
         </div>
       </section>

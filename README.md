@@ -1,46 +1,35 @@
-# Getting Started with Create React App
+# Droppe Xmas
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Droppe Xmas is an intuitive cart approval process for parents. It has a flow with high usability for an imaginary christmas gift picking marketplace. It has four pages, namely;
 
-## Available Scripts
+## Dashboard Page
 
-In the project directory, you can run:
+The dashboard contains a summary of the user's actitivities.
+It has an information about active wishlists, total requests, approved request, wallet balance and recent approvals.
 
-### `yarn start`
+## Market Place
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This page contains a marketplace.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Wishlist Page
 
-### `yarn test`
+This page contains a requests made or sent to the user. The user can choose to discard some items, all items or approve all here.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Wallet Page
 
-### `yarn build`
+On this page the user can top up his/her wallet balance.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## User Settings Page
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+On this page the user can create a username and also set his/her transaction limits
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Tips On How To View This Project
 
-### `yarn eject`
+Clone the repo
+Run yarn install
+Run yarn start
+Visit localhost://3000 to view the application.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## This project runs at:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+https://droppee-xmas.herokuapp.com/

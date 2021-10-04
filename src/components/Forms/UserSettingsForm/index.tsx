@@ -4,7 +4,7 @@ import styles from "./usersettingsform.module.scss";
 interface Props {
   limitPerWishlist: string;
   username: string;
-  isSettingsSaved?: boolean;
+  isSettingsSaved: boolean;
   handleSubmit?: (arg: any) => void;
   handleChange?: (arg: any) => void;
 }

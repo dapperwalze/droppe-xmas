@@ -21,8 +21,6 @@ const Modal = (props: Props) => {
   const { userSettings, approvedWishlists } = useSelector(wishlistSelector);
   const { limitPerWishlist } = userSettings;
   const { walletBalance } = useSelector(walletSelector);
-  const [amount, setAmount] = useState(0);
-  const [discountedAmount, setDiscountedAmount] = useState(0);
 
   const productOccurence: Record<string, any> = {};
   approvedWishlists.forEach((cart: Record<string, any>) => {
@@ -40,25 +38,6 @@ const Modal = (props: Props) => {
     .filter(({ count }) => count > 1)
     .map((prod) => ({ ...prod, discount: prod.count * 10 }));
 
-  console.log({ productsWithDiscount });
-
-  approvedWishlists.forEach((cart: Record<string, any>) => {
-    cart.products.forEach((product: Record<string, any>) => {
-      let productMatch = allProducts?.find(
-        (item: Record<string, any>) => item?.id === product?.productId
-      );
-      const totalAmount = productMatch?.price * product?.quantity;
-      setAmount(totalAmount);
-
-      productsWithDiscount.forEach((product) => {
-        let amountAfterDiscount =
-          totalAmount - (product?.discount / 100) * totalAmount;
-        console.log("dif:", totalAmount - amountAfterDiscount);
-        setDiscountedAmount(amountAfterDiscount);
-        return amountAfterDiscount;
-      });
-    });
-  });
   return (
     <div
       className={styles.modalBg}

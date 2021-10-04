@@ -38,11 +38,14 @@ const Modal = (props: Props) => {
     .filter(({ count }) => count > 1)
     .map((prod) => ({ ...prod, discount: prod.count * 10 }));
 
+  console.log({ productsWithDiscount });
+
+  // const totalAmount = price * quantity;
+
   return (
     <div
       className={styles.modalBg}
       style={{ display: visible ? "block" : "none" }}
-      onClick={onCancel}
     >
       <div className={styles.container}>
         <div className={styles.modalHeader}>

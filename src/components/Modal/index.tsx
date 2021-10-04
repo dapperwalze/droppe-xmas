@@ -38,24 +38,6 @@ const Modal = (props: Props) => {
     .filter(({ count }) => count > 1)
     .map((prod) => ({ ...prod, discount: prod.count * 10 }));
 
-  // approvedWishlists?.map((cart: Record<string, any>) =>
-  //   cart.products.map((product: Record<string, any>) => {
-  //     let productMatch = allProducts?.find(
-  //       (item: Record<string, any>) => item?.id === product?.productId
-  //     );
-
-  //    let amountAfterDiscount = 0;
-  //     const totalAmount = productMatch.price * product.quantity;
-  //     productsWithDiscount.map((prod) =>
-  //       prod?.productId === product?.productId
-  //         ? (amountAfterDiscount +=
-  //             totalAmount - (prod.discount / 100) * totalAmount)
-  //         : (amountAfterDiscount += totalAmount - (0 / 100) * totalAmount)
-  //     );
-  //     console.log({ amountAfterDiscount });
-  //   })
-  // );
-
   return (
     <div
       className={styles.modalBg}

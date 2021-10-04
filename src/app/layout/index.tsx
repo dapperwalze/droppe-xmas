@@ -29,9 +29,9 @@ export const DroppeXmasLayout = () => {
           <Route exact path="/user-settings">
             <UserSettings />
           </Route>
-          <Route exact path="/sign-out"></Route>
         </Switch>
       </DroppeXmasContent>
     </div>
   );
 };
+export default DroppeXmasLayout;

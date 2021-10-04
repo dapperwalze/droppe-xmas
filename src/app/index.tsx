@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import styles from "./app.module.scss";
-import { DroppeXmasLayout } from "./layout";
+import DroppeXmasLayout from "./layout";
 
 const App = () => {
   return (

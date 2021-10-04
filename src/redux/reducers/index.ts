@@ -7,8 +7,8 @@ import wishlistReducer from "./wishlistReducer";
 const rootReducer = combineReducers({
   allProducts: allProductsReducer,
   wishlists: cartsReducer,
+  wishlist: wishlistReducer,
   wallet: walletReducer,
-  approvedWishlists: wishlistReducer,
 });
 
 export default rootReducer;

@@ -12,7 +12,7 @@ import { wishlistSelector } from "../../redux/reducers/wishlistReducer";
 const Dashboard = () => {
   const { carts, isLoading } = useSelector(wishlistsSelector);
   const { walletBalance } = useSelector(walletSelector);
-  const { approvedWishlists } = useSelector(wishlistSelector);
+  const { approvedWishlists, userSettings } = useSelector(wishlistSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const Dashboard = () => {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.welcomeGreeting}>Hello, Walter.</h2>
+      <h2 className={styles.welcomeGreeting}>Hello, {userSettings.username}</h2>
 
       <section className={styles.firstRow}>
         <div className={styles.wishlistCard}>

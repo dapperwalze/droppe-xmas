@@ -6,7 +6,9 @@ import { ProductCard } from "./../../components/Cards/ProductCard/index";
 const MarketPlace = () => {
   return (
     <div className={styles.marketPlace}>
-      <h2>The best place to get what you need.</h2>
+      <h2 className={styles.pageHeader}>
+        The best place to get what you need.
+      </h2>
 
       <div className={styles.categoryRow}>
         <div className={styles.categoryHeader}>

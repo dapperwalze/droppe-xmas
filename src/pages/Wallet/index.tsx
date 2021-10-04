@@ -14,6 +14,7 @@ interface Event {
 const Wallet = () => {
   const { walletBalance, hasErrors, isTransactionSuccessful } =
     useSelector(walletSelector);
+
   const [formState, setFormState] = useState({
     cardNumber: "",
     expiryDate: "",
@@ -51,7 +52,7 @@ const Wallet = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
+      <header className={styles.header}>
         <h2>Wallet</h2>
         <span className={styles.walletBalanceBlock}>
           Available Balance:
@@ -59,7 +60,7 @@ const Wallet = () => {
             {handleCurrencyFormatting(walletBalance)}
           </span>
         </span>
-      </div>
+      </header>
       {isTransactionSuccessful && (
         <span className={styles.transactionSuccess}>
           Transaction was successful!

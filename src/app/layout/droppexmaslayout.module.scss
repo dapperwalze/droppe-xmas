@@ -3,3 +3,11 @@
   display: grid;
   grid-template-columns: 1fr 3fr;
 }
+
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+  .droppeXmasLayout {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+}

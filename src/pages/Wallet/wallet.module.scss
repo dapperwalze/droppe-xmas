@@ -50,3 +50,29 @@ $line-height: 20px;
   font-weight: 400;
   font-size: 1.2rem;
 }
+
+@media only screen and (min-width: 320px) and (max-width: 800px) {
+  .header {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+
+    h2 {
+      font-family: $primary-font-family;
+      line-height: $line-height;
+      font-weight: $font-weight;
+    }
+  }
+  .walletBalanceBlock {
+    color: rgba(52, 61, 72, 1);
+    font-family: $primary-font-family;
+    font-weight: 400;
+    line-height: $line-height;
+    .walletBalance {
+      font-size: $primary-font-Size;
+      margin-left: 5px;
+    }
+  }
+}

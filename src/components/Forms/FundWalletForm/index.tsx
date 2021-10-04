@@ -17,7 +17,7 @@ const FundWalletForm = (props: FundWalletProps) => {
   return (
     <div className={styles.formContainer}>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="card-number" className={styles.label}>
+        <label htmlFor="cardNumber" className={styles.label}>
           Card Number
         </label>
         <div className={styles.formRow}>

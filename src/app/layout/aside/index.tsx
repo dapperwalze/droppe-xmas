@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import styles from "./aside.module.scss";
 
 const DroppeXmasAside = () => {
@@ -7,7 +7,8 @@ const DroppeXmasAside = () => {
       id: 1,
       name: (
         <span className={styles.listItem}>
-          <i className="ri-dashboard-line" /> Dashboard
+          <i className="ri-dashboard-line" />{" "}
+          <span className={styles.listItemLabel}>Dashboard</span>
         </span>
       ),
       location: "./dashboard",
@@ -16,7 +17,8 @@ const DroppeXmasAside = () => {
       id: 2,
       name: (
         <span className={styles.listItem}>
-          <i className="ri-store-line" /> Market Place
+          <i className="ri-store-line" />{" "}
+          <span className={styles.listItemLabel}>Market Place</span>
         </span>
       ),
       location: "./market-place",
@@ -25,7 +27,8 @@ const DroppeXmasAside = () => {
       id: 3,
       name: (
         <span className={styles.listItem}>
-          <i className="ri-file-list-line" /> Wish Lists
+          <i className="ri-file-list-line" />{" "}
+          <span className={styles.listItemLabel}>Wish Lists</span>
         </span>
       ),
       location: "./wish-lists",
@@ -34,7 +37,8 @@ const DroppeXmasAside = () => {
       id: 4,
       name: (
         <span className={styles.listItem}>
-          <i className="ri-wallet-line" /> Wallet
+          <i className="ri-wallet-line" />
+          <span className={styles.listItemLabel}>Wallet</span>
         </span>
       ),
       location: "./wallet",
@@ -43,7 +47,8 @@ const DroppeXmasAside = () => {
       id: 5,
       name: (
         <span className={styles.listItem}>
-          <i className="ri-user-settings-line" /> Settings
+          <i className="ri-user-settings-line" />
+          <span className={styles.listItemLabel}>Settings</span>
         </span>
       ),
       location: "./user-settings",
@@ -52,7 +57,8 @@ const DroppeXmasAside = () => {
       id: 6,
       name: (
         <span className={styles.listItem}>
-          <i className="ri-logout-box-r-line" /> Sign Out
+          <i className="ri-logout-box-r-line" />
+          <span className={styles.listItemLabel}>Sign Out</span>
         </span>
       ),
       location: "./sign-out",
@@ -62,7 +68,9 @@ const DroppeXmasAside = () => {
     <aside className={styles.aside}>
       <div className={styles.logoContainer}>
         <h1 className={styles.logo}>
-          Droppe <span className={styles.xmasColor}>Xmas</span>
+          <Link className={styles.logoLink} to="./dashboard">
+            Droppe <span className={styles.xmasColor}>Xmas</span>
+          </Link>
         </h1>
       </div>
       <div className={styles.sideNavBar}>

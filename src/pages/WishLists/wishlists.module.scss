@@ -23,3 +23,17 @@ $line-height: 20px;
   column-gap: 20px;
   margin-top: 50px;
 }
+
+@media only screen and (min-width: 320px) and (max-width: 800px) {
+  .row {
+    width: 100%;
+    height: auto;
+    margin-bottom: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    column-gap: 20px;
+    margin-top: 50px;
+  }
+}

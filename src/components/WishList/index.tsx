@@ -1,9 +1,15 @@
 import { useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./wishlist.module.scss";
 import { handleCurrencyFormatting } from "./../../utils/helpers";
 import { deleteFromWishList } from "../../redux/actions/wishlistsActions";
-import { approveWishlist } from "../../redux/actions/wishlistActions";
+import {
+  approveWishlistFailure,
+  saveCart,
+} from "../../redux/actions/wishlistActions";
+import Modal from "../Modal";
+import { wishlistSelector } from "../../redux/reducers/wishlistReducer";
+import { walletSelector } from "../../redux/reducers/walletReducer";
 
 interface WishListProps {
   cart: Record<string, any>;
@@ -14,7 +20,10 @@ const WishList = (props: WishListProps) => {
   const { cart, allProducts } = props;
   const { products, id } = cart;
   const [isWishListOpen, setIsWishListOpen] = useState(false);
-
+  const { userSettings } = useSelector(wishlistSelector);
+  const { limitPerWishlist } = userSettings;
+  const { walletBalance } = useSelector(walletSelector);
+  const [isVisible, setIsVisible] = useState(false);
   const dispatch = useDispatch();
 
   const handleToggle = useCallback(() => {
@@ -30,9 +39,24 @@ const WishList = (props: WishListProps) => {
 
   const handleWishlistApproval = useCallback(
     (cart) => {
-      dispatch(approveWishlist(cart));
+      if (walletBalance > 0 && limitPerWishlist > 0) {
+        dispatch(saveCart(cart));
+        setIsVisible(true);
+      }
+      if (walletBalance < 1 || limitPerWishlist < 1) {
+        dispatch(approveWishlistFailure());
+        setIsVisible(true);
+      }
     },
-    [dispatch]
+    [dispatch, walletBalance, limitPerWishlist]
+  );
+
+  const handleCancel = useCallback(
+    (e) => {
+      e.stopPropagation();
+      setIsVisible(false);
+    },
+    [setIsVisible]
   );
 
   return (
@@ -99,6 +123,25 @@ const WishList = (props: WishListProps) => {
           </div>
         </div>
       </div>
+      {limitPerWishlist < 200 || walletBalance < 1 ? (
+        <Modal
+          messageStatus={`Can't approve this wishlist as ${
+            limitPerWishlist < 200
+              ? "it surpasses your spend limit"
+              : "your wallet balance is low "
+          } `}
+          messageHeader="Ooops! 😞"
+          onCancel={handleCancel}
+          visible={isVisible}
+        />
+      ) : (
+        <Modal
+          messageStatus="You've sucessfully approved this wishlist"
+          messageHeader="Yay! 🎉"
+          onCancel={handleCancel}
+          visible={isVisible}
+        />
+      )}
     </>
   );
 };

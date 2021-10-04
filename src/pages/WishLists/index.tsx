@@ -4,13 +4,12 @@ import { allProductsSelector } from "../../redux/reducers/allProductsReducer";
 import { wishlistsSelector } from "../../redux/reducers/wishlistsReducer";
 import styles from "./wishlists.module.scss";
 import { fetchCarts } from "../../redux/actions/wishlistsActions";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { getAllProducts } from "./../../redux/actions/productActions";
 
 const WishLists = () => {
   const { allProducts } = useSelector(allProductsSelector);
   const { carts, hasErrors, isLoading } = useSelector(wishlistsSelector);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,7 +17,7 @@ const WishLists = () => {
     dispatch(getAllProducts());
   }, [dispatch]);
 
-  const renderWishlists = () => {
+  const renderWishlists = useCallback(() => {
     if (isLoading) return <>loading...</>;
 
     if (hasErrors)
@@ -30,12 +29,11 @@ const WishLists = () => {
     return carts?.map((cart: Record<string, any>) => (
       <WishList key={cart.id} cart={cart} allProducts={allProducts} />
     ));
-  };
+  }, [allProducts, carts, hasErrors, isLoading]);
 
   return (
     <div className={styles.container}>
       <h2>Wish Lists</h2>
-
       <div className={styles.row}>{renderWishlists()}</div>
     </div>
   );

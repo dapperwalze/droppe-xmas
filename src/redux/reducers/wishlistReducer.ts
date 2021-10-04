@@ -2,11 +2,17 @@ import * as actions from "../actions/wishlistActions";
 
 interface wishlistState {
   approvedWishlists: Record<string, any>[];
+  userSettings: Record<string, any>;
   hasErrors: boolean;
 }
 
 const initialState: wishlistState = {
   approvedWishlists: [],
+  userSettings: {
+    username: "",
+    limitPerWishlist: 0,
+    isSettingsSaved: false,
+  },
   hasErrors: false,
 };
 
@@ -27,11 +33,18 @@ const wishlistReducer = (state = initialState, action: Action) => {
     case actions.APPROVE_WISHLIST_FAILURE:
       return { ...state, hasErrors: true };
 
+    case actions.SAVE_SETTINGS:
+    case actions.SAVE_SETTINGS_SUCCESS:
+      return {
+        ...state,
+        userSettings: action.payload,
+      };
+    case actions.SAVE_SETTINGS_FAILURE:
+      return { ...state };
     default:
       return state;
   }
 };
-export const wishlistSelector = (state: { approvedWishlists: any }) =>
-  state.approvedWishlists;
+export const wishlistSelector = (state: { wishlist: any }) => state.wishlist;
 
 export default wishlistReducer;

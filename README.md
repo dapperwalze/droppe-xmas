@@ -25,9 +25,9 @@ On this page the user can create a username and also set his/her transaction lim
 
 ## Tips On How To View This Project
 
-Clone the repo
-Run yarn install
-Run yarn start
+Clone the repo\
+Run yarn install\
+Run yarn start\
 Visit localhost://3000 to view the application.
 
 ## This project runs at:

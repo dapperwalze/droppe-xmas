@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./wishlist.module.scss";
 import { handleCurrencyFormatting } from "./../../utils/helpers";
@@ -123,24 +123,28 @@ const WishList = (props: WishListProps) => {
           </div>
         </div>
       </div>
-      {limitPerWishlist < 200 || walletBalance < 1 ? (
-        <Modal
-          messageStatus={`Can't approve this wishlist as ${
-            limitPerWishlist < 200
-              ? "it surpasses your spend limit"
-              : "your wallet balance is low "
-          } `}
-          messageHeader="Ooops! 😞"
-          onCancel={handleCancel}
-          visible={isVisible}
-        />
-      ) : (
-        <Modal
-          messageStatus="You've sucessfully approved this wishlist"
-          messageHeader="Yay! 🎉"
-          onCancel={handleCancel}
-          visible={isVisible}
-        />
+      {useMemo(
+        () =>
+          limitPerWishlist < 200 || walletBalance < 1 ? (
+            <Modal
+              messageStatus={`Can't approve this wishlist as ${
+                limitPerWishlist < 200
+                  ? "it surpasses your spend limit"
+                  : "your wallet balance is low "
+              } `}
+              messageHeader="Ooops! 😞"
+              onCancel={handleCancel}
+              visible={isVisible}
+            />
+          ) : (
+            <Modal
+              messageStatus="You've sucessfully approved this wishlist"
+              messageHeader="Yay! 🎉"
+              onCancel={handleCancel}
+              visible={isVisible}
+            />
+          ),
+        [isVisible, handleCancel, limitPerWishlist, walletBalance]
       )}
     </>
   );

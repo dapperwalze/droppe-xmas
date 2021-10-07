@@ -96,7 +96,7 @@ const Modal = (props: Props) => {
           ) : (
             <>
               <div className={styles.messageBody}>
-                <p>Approved items: </p>{" "}
+                {approvedWishlists?.length > 0 && <p>Approved items: </p>}
                 <ul>
                   {approvedWishlists?.map((cart: Record<string, any>) =>
                     cart.products.map((product: Record<string, any>) => {
@@ -114,9 +114,9 @@ const Modal = (props: Props) => {
                     })
                   )}
                 </ul>
-                <p>Discarded items:</p>
+                {discardedItems?.length > 0 && <p>Discarded items:</p>}
                 <ul>
-                  {discardedItems?.length > 1 &&
+                  {discardedItems?.length > 0 &&
                     discardedItems.map((product: Record<string, any>) => {
                       let productMatch = allProducts?.find(
                         (item: Record<string, any>) =>

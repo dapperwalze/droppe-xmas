@@ -91,7 +91,7 @@ const Dashboard = () => {
               <span>No wishlist has been approved</span>
             ) : (
               approvedWishlists.slice(0, 3).map((cart: Record<string, any>) => (
-                <li className={styles.approvedListItem}>
+                <li key={cart.id} className={styles.approvedListItem}>
                   <div className={styles.listData}>
                     <span>User ID: {cart?.id} </span> <span>$140.23</span>
                   </div>

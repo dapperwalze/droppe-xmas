@@ -30,13 +30,14 @@ const Wallet = () => {
     (evt: Event) => {
       evt.preventDefault();
       dispatch(fundWallet(+amount));
-      setFormState({
-        ...formState,
-        cardNumber: "",
-        expiryDate: "",
-        cvv: "",
-        amount: "",
-      });
+      setFormState(
+        Object.assign({}, formState, {
+          cardNumber: "",
+          expiryDate: "",
+          cvv: "",
+          amount: "",
+        })
+      );
     },
     [formState, dispatch, amount]
   );
@@ -45,7 +46,7 @@ const Wallet = () => {
     (evt: Event) => {
       const name = evt.target.name;
       const value = evt.target.value;
-      setFormState({ ...formState, [name]: value });
+      setFormState(Object.assign({}, formState, { [name]: value }));
     },
     [formState]
   );

@@ -21,3 +21,13 @@ $line-height: 20px;
     font-weight: $font-weight;
   }
 }
+.success {
+  color: rgba(38, 171, 95, 1);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  font-family: $primary-font-family;
+  font-weight: 400;
+  font-size: 1.2rem;
+}

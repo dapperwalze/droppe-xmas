@@ -1,27 +1,18 @@
 import React from "react";
 import styles from "./usersettingsform.module.scss";
 
-interface Props {
+interface UserSettingsFormProps {
   limitPerWishlist: string;
   username: string;
-  isSettingsSaved: boolean;
   handleSubmit?: (arg: any) => void;
   handleChange?: (arg: any) => void;
 }
 
-export default function UserSettingsForm(props: Props) {
-  const {
-    limitPerWishlist,
-    username,
-    isSettingsSaved,
-    handleSubmit,
-    handleChange,
-  } = props;
+export default function UserSettingsForm(props: UserSettingsFormProps) {
+  const { limitPerWishlist, username, handleSubmit, handleChange } = props;
 
   return (
     <div className={styles.formContainer}>
-      {isSettingsSaved && <p>Settings updated successfully</p>}
-
       <form className={styles.form} onSubmit={handleSubmit}>
         <label htmlFor="username" className={styles.label}>
           Username

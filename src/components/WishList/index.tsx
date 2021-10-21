@@ -1,6 +1,5 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styles from "./wishlist.module.scss";
 import { handleCurrencyFormatting } from "./../../utils/helpers";
 import { deleteFromWishList } from "../../redux/actions/wishlistsActions";
 import {
@@ -10,15 +9,17 @@ import {
 import Modal from "../Modal";
 import { wishlistSelector } from "../../redux/reducers/wishlistReducer";
 import { walletSelector } from "../../redux/reducers/walletReducer";
+import styles from "./wishlist.module.scss";
+import { allProductsSelector } from "../../redux/reducers/allProductsReducer";
 
 interface WishListProps {
   cart: Record<string, any>;
-  allProducts: Record<string, any>;
 }
 
 const WishList = (props: WishListProps) => {
-  const { cart, allProducts } = props;
+  const { cart } = props;
   const { products, id } = cart;
+  const { allProducts } = useSelector(allProductsSelector);
   const [isWishListOpen, setIsWishListOpen] = useState(false);
   const { userSettings } = useSelector(wishlistSelector);
   const { limitPerWishlist } = userSettings;
@@ -26,31 +27,25 @@ const WishList = (props: WishListProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const dispatch = useDispatch();
 
-  const handleToggle = useCallback(() => {
+  const handleToggle = () => {
     setIsWishListOpen((prev) => !prev);
-  }, []);
+  };
 
-  const handleDiscardItem = useCallback(
-    (cartId, productId) => {
-      dispatch(deleteFromWishList(cartId, productId));
-    },
-    [dispatch]
-  );
+  const handleDiscardItem = (cartId: number, productId: number) => {
+    dispatch(deleteFromWishList(cartId, productId));
+  };
 
-  const handleWishlistApproval = useCallback(
-    (cart) => {
-      if (walletBalance > 0 && limitPerWishlist > 0) {
-        dispatch(saveCart(cart));
-        setIsVisible(true);
-      }
-      if (walletBalance < 1 || limitPerWishlist < 1) {
-        dispatch(approveWishlistFailure());
-        setIsVisible(true);
-      }
-    },
-    [dispatch, walletBalance, limitPerWishlist]
-  );
-
+  const handleWishlistApproval = (cart: Record<string, any>) => {
+    if (walletBalance > 0 && limitPerWishlist > 0) {
+      dispatch(saveCart(cart));
+      setIsVisible(true);
+      handleToggle();
+    }
+    if (walletBalance < 1 || limitPerWishlist < 1) {
+      dispatch(approveWishlistFailure());
+      setIsVisible(true);
+    }
+  };
   const handleCancel = useCallback(
     (e) => {
       e.stopPropagation();
@@ -123,28 +118,24 @@ const WishList = (props: WishListProps) => {
           </div>
         </div>
       </div>
-      {useMemo(
-        () =>
-          limitPerWishlist < 200 || walletBalance < 1 ? (
-            <Modal
-              messageStatus={`Can't approve this wishlist as ${
-                limitPerWishlist < 200
-                  ? "it surpasses your spend limit"
-                  : "your wallet balance is low "
-              } `}
-              messageHeader="Ooops! 😞"
-              onCancel={handleCancel}
-              visible={isVisible}
-            />
-          ) : (
-            <Modal
-              messageStatus="You've sucessfully approved this wishlist"
-              messageHeader="Yay! 🎉"
-              onCancel={handleCancel}
-              visible={isVisible}
-            />
-          ),
-        [isVisible, handleCancel, limitPerWishlist, walletBalance]
+      {limitPerWishlist < 200 || walletBalance < 1 ? (
+        <Modal
+          messageStatus={`Can't approve this wishlist as ${
+            limitPerWishlist < 200
+              ? "it surpasses your spend limit"
+              : "your wallet balance is low "
+          } `}
+          messageHeader="Ooops! 😞"
+          onCancel={handleCancel}
+          visible={isVisible}
+        />
+      ) : (
+        <Modal
+          messageStatus="You've sucessfully approved this wishlist"
+          messageHeader="Yay! 🎉"
+          onCancel={handleCancel}
+          visible={isVisible}
+        />
       )}
     </>
   );

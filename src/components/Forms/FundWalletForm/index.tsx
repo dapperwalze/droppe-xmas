@@ -25,7 +25,6 @@ const FundWalletForm = (props: FundWalletProps) => {
             className={styles.formInput}
             type="number"
             min={0}
-            pattern="[0-9]{1,16}"
             required
             name="cardNumber"
             value={cardNumber}
@@ -41,7 +40,6 @@ const FundWalletForm = (props: FundWalletProps) => {
               className={styles.smallInput}
               type="number"
               min={0}
-              pattern="[0-9]{4}"
               required
               name="expiryDate"
               value={expiryDate}
@@ -56,7 +54,6 @@ const FundWalletForm = (props: FundWalletProps) => {
               className={styles.smallInput}
               type="number"
               min={0}
-              pattern="[0-9]{3,3}"
               required
               name="cvv"
               value={cvv}
@@ -73,7 +70,6 @@ const FundWalletForm = (props: FundWalletProps) => {
               className={styles.smallInput}
               type="number"
               min={0}
-              pattern="[0-9]"
               required
               name="amount"
               value={amount}

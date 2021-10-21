@@ -23,8 +23,7 @@ export function getAllProducts() {
 
     try {
       await axios.get("https://fakestoreapi.com/products").then((response) => {
-        const { data } = response;
-        dispatch(getProductsSuccess(data));
+        dispatch(getProductsSuccess(response.data));
       });
     } catch (error: any) {
       if (error.response) {

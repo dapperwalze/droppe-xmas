@@ -39,31 +39,26 @@ const wishlistsReducer = (state = initialState, action: Action) => {
 
   switch (action.type) {
     case actions.GET_WISHLISTS:
-      return { ...state, discardedItems: [], isLoading: true };
+      return Object.assign({}, state, { isLoading: true });
     case actions.GET_WISHLISTS_SUCCESS:
-      return {
+      return Object.assign({}, state, {
         carts: action.payload,
-        discardedItems: [],
         isLoading: false,
-        hasErrors: false,
-      };
+      });
     case actions.GET_WISHLISTS_FAILURE:
-      return {
-        ...state,
-        discardedItems: [],
-        isLoading: false,
+      return Object.assign({}, state, {
         hasErrors: true,
-      };
+      });
     case actions.DELETE_FROM_WISHLIST:
-      return {
-        ...state,
+      return Object.assign({}, state, {
         carts: clonedCart,
         discardedItems: state.discardedItems.concat(discardedItem),
-      };
+      });
+
     default:
       return state;
   }
 };
-export const wishlistsSelector = (state: { wishlists: any }) => state.wishlists;
+export const wishlistsSelector = (state: any) => state.wishlists;
 
 export default wishlistsReducer;

@@ -21,14 +21,16 @@ const walletReducer = (state = initialState, action: Action) => {
   switch (action.type) {
     case actions.FUND_WALLET:
     case actions.FUND_WALLET_SUCCESS:
-      return {
-        ...state,
+      return Object.assign({}, state, {
         walletBalance: state.walletBalance + action.payload,
         hasErrors: false,
         isTransactionSuccessful: true,
-      };
+      });
     case actions.FUND_WALLET_FAILURE:
-      return { ...state, hasErrors: true, isTransactionSuccessful: false };
+      return Object.assign({}, state, {
+        hasErrors: true,
+        isTransactionSuccessful: false,
+      });
     default:
       return state;
   }

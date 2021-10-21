@@ -7,13 +7,13 @@ export const SAVE_SETTINGS = "SAVE_SETTINGS";
 export const SAVE_SETTINGS_SUCCESS = "SAVE_SETTINGS_SUCCESS";
 export const SAVE_SETTINGS_FAILURE = "SAVE_SETTINGS_FAILURE";
 
-export const approveWishlist = (cart: Record<string, any>) => ({
+export const approveWishlist = () => ({
   type: APPROVE_WISHLIST,
-  payload: cart,
 });
 
-export const approveWishlistSuccess = () => ({
+export const approveWishlistSuccess = (cart: Record<string, any>) => ({
   type: APPROVE_WISHLIST_SUCCESS,
+  payload: cart,
 });
 
 export const approveWishlistFailure = () => ({
@@ -41,14 +41,16 @@ export const saveSettingsFailure = () => ({
   type: SAVE_SETTINGS_FAILURE,
 });
 
-export function saveCart(cart: Record<string, any>) {
-  return async (dispatch: (arg: any) => any) => {
-    dispatch(approveWishlist(cart));
+export const saveCart = (cart: Record<string, any>) => {
+  return (dispatch: (arg: any) => any) => {
+    dispatch(approveWishlist());
 
     try {
-      await axios
+      axios
         .put(`https://fakestoreapi.com/carts/${cart.id}`, cart)
-        .then((response) => {});
+        .then((response) => {
+          dispatch(approveWishlistSuccess(response.data));
+        });
     } catch (error: any) {
       if (error.response) {
         dispatch(approveWishlistFailure());
@@ -60,4 +62,4 @@ export function saveCart(cart: Record<string, any>) {
       console.log(error);
     }
   };
-}
+};

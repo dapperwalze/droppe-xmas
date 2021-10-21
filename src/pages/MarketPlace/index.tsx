@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import styles from "./marketplace.module.scss";
-// import Mouse from "./../../app/assets/images/mouse.jpg";
 import { ProductCard } from "./../../components/Cards/ProductCard/index";
 
 const MarketPlace = () => {

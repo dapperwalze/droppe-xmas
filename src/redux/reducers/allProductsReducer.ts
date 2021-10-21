@@ -20,15 +20,16 @@ export type Action = {
 const allProductsReducer = (state = initialState, action: Action) => {
   switch (action.type) {
     case actions.GET_PRODUCTS:
-      return { ...state, isLoading: true };
+      return Object.assign({}, state, { isLoading: true });
+
     case actions.GET_PRODUCTS_SUCCESS:
-      return {
+      return Object.assign({}, state, {
         allProducts: action.payload,
         isLoading: false,
-        hasErrors: false,
-      };
+      });
+
     case actions.GET_PRODUCTS_FAILURE:
-      return { ...state, isLoading: false, hasErrors: true };
+      return Object.assign({}, state, { hasErrors: true });
     default:
       return state;
   }

@@ -26,17 +26,15 @@ export const deleteFromWishList = (cartId: number, productId: number) => ({
   },
 });
 
-export function fetchCarts() {
+export const fetchCarts = () => {
   return async (dispatch: (arg: any) => any) => {
     dispatch(getWishLists());
 
     try {
-      await axios
-        .get("https://fakestoreapi.com/carts?limit=5")
-        .then((response) => {
-          const { data } = response;
-          dispatch(getWishListsSuccess(data));
-        });
+      const response = await axios.get(
+        "https://fakestoreapi.com/carts?limit=5"
+      );
+      dispatch(getWishListsSuccess(response.data));
     } catch (error: any) {
       if (error.response) {
         dispatch(getWishListsFailure());
@@ -48,4 +46,4 @@ export function fetchCarts() {
       console.log(error);
     }
   };
-}
+};

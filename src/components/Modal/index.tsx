@@ -6,7 +6,7 @@ import { wishlistSelector } from "../../redux/reducers/wishlistReducer";
 import { wishlistsSelector } from "../../redux/reducers/wishlistsReducer";
 import styles from "./modal.module.scss";
 
-interface Props {
+interface ModalProps {
   messageHeader?: string;
   messageStatus: string;
   visible: boolean;
@@ -14,7 +14,7 @@ interface Props {
   onCancel: (e: Record<string, any>) => void;
 }
 
-const Modal = (props: Props) => {
+const Modal = (props: ModalProps) => {
   const { messageHeader, messageStatus, visible, totalAmount, onCancel } =
     props;
   const { allProducts } = useSelector(allProductsSelector);
@@ -22,49 +22,22 @@ const Modal = (props: Props) => {
   const { userSettings, approvedWishlists } = useSelector(wishlistSelector);
   const { limitPerWishlist } = userSettings;
   const { walletBalance } = useSelector(walletSelector);
-  // const [amountAfterDiscount, setAmountAfterDiscount] = useState(0);
-  // const [discountReceived, setDiscountReceived] = useState(0);
 
-  // const productOccurence: Record<string, any> = {};
-  // approvedWishlists.forEach((cart: Record<string, any>) => {
-  //   cart.products.forEach((product: Record<string, any>) => {
-  //     if (!productOccurence[product.productId]) {
-  //       productOccurence[product.productId] = { count: 0, totalQuantity: 0 };
-  //     }
-  //     productOccurence[product.productId].count += 1;
-  //     productOccurence[product.productId].totalQuantity += product.quantity;
-  //     productOccurence[product.productId].productId = product.productId;
-  //   });
-  // });
+  const productOccurence: Record<string, any> = {};
+  approvedWishlists.forEach((cart: Record<string, any>) => {
+    cart.products.forEach((product: Record<string, any>) => {
+      if (!productOccurence[product.productId]) {
+        productOccurence[product.productId] = { count: 0, totalQuantity: 0 };
+      }
+      productOccurence[product.productId].count += 1;
+      productOccurence[product.productId].totalQuantity += product.quantity;
+      productOccurence[product.productId].productId = product.productId;
+    });
+  });
 
-  // const productsWithDiscount = Object.values(productOccurence)
-  //   .filter(({ count }) => count > 1)
-  //   .map((prod) => ({ ...prod, discount: prod.count * 10 }));
-
-  // let totalAmount = 0;
-  // approvedWishlists.forEach((cart: Record<string, any>) => {
-  //   cart.products.forEach((product: Record<string, any>) => {
-  //     let productMatch = allProducts?.find(
-  //       (item: Record<string, any>) => item?.id === product?.productId
-  //     );
-
-  //     let amount = productMatch?.price * product?.quantity;
-  //     totalAmount += +amount.toFixed(2);
-
-  //     // let discountReceived = productsWithDiscount.reduce(
-  //     //   (accumulator, current) => accumulator + current?.discount,
-  //     //   0
-  //     // );
-  //     // setDiscountReceived(discountReceived);
-
-  //     let amountAfterDiscount = productsWithDiscount.reduce(
-  //       (accumulator, current) =>
-  //         accumulator - (current?.discount / 100) * accumulator,
-  //       totalAmount
-  //     );
-  //     // setAmountAfterDiscount(amountAfterDiscount);
-  //   });
-  // });
+  const productsWithDiscount = Object.values(productOccurence)
+    .filter(({ count }) => count > 1)
+    .map((prod) => ({ ...prod, discount: prod.count * 10 }));
 
   return (
     <div

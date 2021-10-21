@@ -2,29 +2,29 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { walletSelector } from "../../redux/reducers/walletReducer";
 import { wishlistsSelector } from "../../redux/reducers/wishlistsReducer";
-import styles from "./dashboard.module.scss";
 import { handleCurrencyFormatting } from "./../../utils/helpers";
 import { useEffect } from "react";
 import { fetchCarts } from "../../redux/actions/wishlistsActions";
 import { getAllProducts } from "../../redux/actions/productActions";
 import { wishlistSelector } from "../../redux/reducers/wishlistReducer";
+import styles from "./dashboard.module.scss";
 
 const Dashboard = () => {
   const { carts, isLoading } = useSelector(wishlistsSelector);
   const { walletBalance } = useSelector(walletSelector);
   const { approvedWishlists, userSettings } = useSelector(wishlistSelector);
+  const { username } = userSettings;
   const dispatch = useDispatch();
+  const activeWishLists = carts.length;
 
   useEffect(() => {
     dispatch(fetchCarts());
     dispatch(getAllProducts());
   }, [dispatch]);
 
-  const activeWishLists = carts.length;
-
   return (
     <div className={styles.container}>
-      <h2 className={styles.welcomeGreeting}>Hello, {userSettings.username}</h2>
+      <h2 className={styles.welcomeGreeting}>Hello, {username}</h2>
 
       <section className={styles.firstRow}>
         <div className={styles.wishlistCard}>

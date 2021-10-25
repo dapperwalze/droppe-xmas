@@ -3,6 +3,7 @@ import axios from "axios";
 export const APPROVE_WISHLIST = "APPROVE_WISHLIST";
 export const APPROVE_WISHLIST_SUCCESS = "APPROVE_WISHLIST_SUCCESS";
 export const APPROVE_WISHLIST_FAILURE = "APPROVE_WISHLIST_FAILURE";
+export const SET_AMOUNT_AFTER_DISCOUNT = "SET_AMOUNT_AFTER_DISCOUNT";
 export const SAVE_SETTINGS = "SAVE_SETTINGS";
 export const SAVE_SETTINGS_SUCCESS = "SAVE_SETTINGS_SUCCESS";
 export const SAVE_SETTINGS_FAILURE = "SAVE_SETTINGS_FAILURE";
@@ -18,6 +19,11 @@ export const approveWishlistSuccess = (cart: Record<string, any>) => ({
 
 export const approveWishlistFailure = () => ({
   type: APPROVE_WISHLIST_FAILURE,
+});
+
+export const setAmountAfterDiscount = (amount: number) => ({
+  type: SET_AMOUNT_AFTER_DISCOUNT,
+  payload: amount,
 });
 
 export const saveSettings = (

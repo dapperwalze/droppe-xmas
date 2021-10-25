@@ -1,12 +1,13 @@
 import * as actions from "../actions/wishlistActions";
 
-interface wishlistState {
+interface WishlistState {
   approvedWishlists: Record<string, any>[];
   hasErrors: boolean;
   userSettings: Record<string, any>;
+  amountAfterDiscount: number;
 }
 
-const initialState: wishlistState = {
+const initialState: WishlistState = {
   approvedWishlists: [],
   hasErrors: false,
   userSettings: {
@@ -14,6 +15,7 @@ const initialState: wishlistState = {
     limitPerWishlist: 0,
     isSettingsSaved: false,
   },
+  amountAfterDiscount: 0,
 };
 
 export type Action = {
@@ -32,6 +34,9 @@ const wishlistReducer = (state = initialState, action: Action) => {
       });
     case actions.APPROVE_WISHLIST_FAILURE:
       return Object.assign({}, state, { hasErrors: true });
+
+    case actions.SET_AMOUNT_AFTER_DISCOUNT:
+      return Object.assign({}, state, { amountAfterDiscount: action.payload });
 
     case actions.SAVE_SETTINGS:
     case actions.SAVE_SETTINGS_SUCCESS:

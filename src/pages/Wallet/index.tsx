@@ -64,7 +64,7 @@ const Wallet = () => {
       </header>
       {isTransactionSuccessful && (
         <span className={styles.transactionSuccess}>
-          Transaction was successful!
+          Transaction was successful.
         </span>
       )}
       {hasErrors && (

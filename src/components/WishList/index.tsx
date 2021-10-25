@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { handleCurrencyFormatting } from "./../../utils/helpers";
 import { deleteFromWishList } from "../../redux/actions/wishlistsActions";
@@ -6,7 +6,6 @@ import {
   approveWishlistFailure,
   saveCart,
 } from "../../redux/actions/wishlistActions";
-import Modal from "../Modal";
 import { wishlistSelector } from "../../redux/reducers/wishlistReducer";
 import { walletSelector } from "../../redux/reducers/walletReducer";
 import styles from "./wishlist.module.scss";
@@ -14,17 +13,22 @@ import { allProductsSelector } from "../../redux/reducers/allProductsReducer";
 
 interface WishListProps {
   cart: Record<string, any>;
+  setIsVisible: (arg: any) => any;
 }
 
 const WishList = (props: WishListProps) => {
-  const { cart } = props;
+  const { cart, setIsVisible } = props;
   const { products, id } = cart;
+
   const { allProducts } = useSelector(allProductsSelector);
+
   const [isWishListOpen, setIsWishListOpen] = useState(false);
-  const { userSettings } = useSelector(wishlistSelector);
+
+  const { userSettings, amountAfterDiscount } = useSelector(wishlistSelector);
   const { limitPerWishlist } = userSettings;
+
   const { walletBalance } = useSelector(walletSelector);
-  const [isVisible, setIsVisible] = useState(false);
+
   const dispatch = useDispatch();
 
   const handleToggle = () => {
@@ -36,23 +40,14 @@ const WishList = (props: WishListProps) => {
   };
 
   const handleWishlistApproval = (cart: Record<string, any>) => {
-    if (walletBalance > 0 && limitPerWishlist > 0) {
+    if (walletBalance > amountAfterDiscount && limitPerWishlist > 0) {
       dispatch(saveCart(cart));
       setIsVisible(true);
       handleToggle();
     }
-    if (walletBalance < 1 || limitPerWishlist < 1) {
-      dispatch(approveWishlistFailure());
-      setIsVisible(true);
-    }
+    dispatch(approveWishlistFailure());
+    setIsVisible(true);
   };
-  const handleCancel = useCallback(
-    (e) => {
-      e.stopPropagation();
-      setIsVisible(false);
-    },
-    [setIsVisible]
-  );
 
   return (
     <>
@@ -118,25 +113,6 @@ const WishList = (props: WishListProps) => {
           </div>
         </div>
       </div>
-      {limitPerWishlist < 200 || walletBalance < 1 ? (
-        <Modal
-          messageStatus={`Can't approve this wishlist as ${
-            limitPerWishlist < 200
-              ? "it surpasses your spend limit"
-              : "your wallet balance is low "
-          } `}
-          messageHeader="Ooops! 😞"
-          onCancel={handleCancel}
-          visible={isVisible}
-        />
-      ) : (
-        <Modal
-          messageStatus="You've sucessfully approved this wishlist"
-          messageHeader="Yay! 🎉"
-          onCancel={handleCancel}
-          visible={isVisible}
-        />
-      )}
     </>
   );
 };

@@ -1,12 +1,12 @@
 import * as actions from "../actions/walletActions";
 
-interface walletState {
+interface WalletState {
   walletBalance: number;
   hasErrors: boolean;
   isTransactionSuccessful: boolean;
 }
 
-const initialState: walletState = {
+const initialState: WalletState = {
   walletBalance: 0,
   hasErrors: false,
   isTransactionSuccessful: false,

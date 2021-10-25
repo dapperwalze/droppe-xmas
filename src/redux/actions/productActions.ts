@@ -17,7 +17,7 @@ export const getProductsFailure = () => ({
   type: GET_PRODUCTS_FAILURE,
 });
 
-export function getAllProducts() {
+export const getAllProducts = () => {
   return async (dispatch: (arg: any) => any) => {
     dispatch(getProducts());
 
@@ -36,4 +36,4 @@ export function getAllProducts() {
       console.log(error);
     }
   };
-}
+};

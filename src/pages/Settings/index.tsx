@@ -12,12 +12,15 @@ interface Event {
 
 const UserSettings = () => {
   const { userSettings } = useSelector(wishlistSelector);
+
   const { username: name, limitPerWishlist: spendLimit } = userSettings;
+
   const [state, setState] = useState({
     username: name,
     limitPerWishlist: spendLimit,
     isSettingsSaved: false,
   });
+
   const { username, limitPerWishlist, isSettingsSaved } = state;
 
   const dispatch = useDispatch();

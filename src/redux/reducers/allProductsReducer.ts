@@ -1,12 +1,12 @@
 import * as actions from "../actions/productActions";
 
-interface wishlistsState {
+interface WishlistsState {
   allProducts: Record<string, any>[];
   isLoading: boolean;
   hasErrors: boolean;
 }
 
-const initialState: wishlistsState = {
+const initialState: WishlistsState = {
   allProducts: [],
   isLoading: false,
   hasErrors: false,

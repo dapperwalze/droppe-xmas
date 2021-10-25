@@ -1,14 +1,14 @@
 import * as actions from "../actions/wishlistsActions";
 import _ from "lodash";
 
-interface wishlistsState {
+interface WishlistsState {
   carts: Record<string, any>[];
   discardedItems: Record<string, any>[];
   isLoading: boolean;
   hasErrors: boolean;
 }
 
-const initialState: wishlistsState = {
+const initialState: WishlistsState = {
   carts: [],
   discardedItems: [],
   isLoading: false,
@@ -48,6 +48,7 @@ const wishlistsReducer = (state = initialState, action: Action) => {
     case actions.GET_WISHLISTS_FAILURE:
       return Object.assign({}, state, {
         hasErrors: true,
+        isLoading: false,
       });
     case actions.DELETE_FROM_WISHLIST:
       return Object.assign({}, state, {

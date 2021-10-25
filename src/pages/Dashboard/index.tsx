@@ -11,10 +11,14 @@ import styles from "./dashboard.module.scss";
 
 const Dashboard = () => {
   const { carts, isLoading } = useSelector(wishlistsSelector);
+
   const { walletBalance } = useSelector(walletSelector);
+
   const { approvedWishlists, userSettings } = useSelector(wishlistSelector);
   const { username } = userSettings;
+
   const dispatch = useDispatch();
+
   const activeWishLists = carts.length;
 
   useEffect(() => {

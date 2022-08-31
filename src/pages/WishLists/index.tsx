@@ -3,12 +3,13 @@ import WishList from "../../components/WishList";
 import { wishlistsSelector } from "../../redux/reducers/wishlistsReducer";
 import styles from "./wishlists.module.scss";
 import { fetchCarts } from "../../redux/actions/wishlistsActions";
-import { useCallback, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import { getAllProducts } from "./../../redux/actions/productActions";
 import Modal from "../../components/Modal";
 import { wishlistSelector } from "../../redux/reducers/wishlistReducer";
 import { walletSelector } from "../../redux/reducers/walletReducer";
 import { setAmountAfterDiscount } from "../../redux/actions/wishlistActions";
+import { Link } from "react-router-dom";
 
 const WishLists = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -91,11 +92,22 @@ const WishLists = () => {
       walletBalance < amountAfterDiscount ||
       limitPerWishlist < 1 ? (
         <Modal
-          messageStatus={`Can't approve this wishlist as ${
-            limitPerWishlist < 1
-              ? "it surpasses your spend limit"
-              : "your wallet balance is low"
-          } `}
+          messageStatus={
+            <>
+              Can't approve this wishlist as{" "}
+              {limitPerWishlist < 1 ? (
+                <>
+                  it surpasses your spend limit, update your spend limit per
+                  cart {<Link to="/user-settings">here</Link>}
+                </>
+              ) : (
+                <>
+                  your wallet balance is low, top up{" "}
+                  {<Link to="/wallet">here</Link>}, then retry.{" "}
+                </>
+              )}{" "}
+            </>
+          }
           messageHeader="Ooops! 😞"
           onCancel={handleCancel}
           visible={isModalVisible}

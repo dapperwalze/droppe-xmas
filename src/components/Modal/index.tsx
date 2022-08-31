@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { ReactNode, useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { allProductsSelector } from "../../redux/reducers/allProductsReducer";
 import { wishlistSelector } from "../../redux/reducers/wishlistReducer";
@@ -8,7 +8,7 @@ import { handleCurrencyFormatting } from "./../../utils/helpers";
 
 interface ModalProps {
   messageHeader?: string;
-  messageStatus: string;
+  messageStatus: ReactNode | ReactNode[];
   visible: boolean;
   handleGetAmount: (...arg: any) => any;
   onCancel: (e: Record<string, any>) => void;

@@ -13,7 +13,7 @@ This page contains a marketplace.
 
 ## Wishlist Page
 
-This page contains a requests made or sent to the user. The user can choose to discard some items, all items or approve all here.
+This page contains requests made or sent to the user. The user can choose to discard some items per wishlist, all items or approve all wishlists.
 
 ## Wallet Page
 
@@ -21,7 +21,7 @@ On this page the user can top up his/her wallet balance.
 
 ## User Settings Page
 
-On this page the user can create a username and also set his/her transaction limits
+On this page the user can create a username and also set his/her spend limits per cart
 
 ## Tips On How To View This Project
 

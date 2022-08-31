@@ -4,8 +4,8 @@ import styles from "./usersettingsform.module.scss";
 interface UserSettingsFormProps {
   limitPerWishlist: string;
   username: string;
-  handleSubmit?: (arg: any) => void;
-  handleChange?: (arg: any) => void;
+  handleSubmit: (arg: any) => void;
+  handleChange: (arg: any) => void;
 }
 
 export default function UserSettingsForm(props: UserSettingsFormProps) {

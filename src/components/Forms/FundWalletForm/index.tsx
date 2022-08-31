@@ -1,16 +1,16 @@
 import React from "react";
 import styles from "./fundwallet.module.scss";
 
-interface FundWalletProps {
+interface FundWalletFormProps {
   cardNumber: string;
   expiryDate: string;
   cvv: string;
   amount: string;
-  handleSubmit?: (arg: any) => void;
-  handleChange?: (arg: any) => void;
+  handleSubmit: (arg: any) => void;
+  handleChange: (arg: any) => void;
 }
 
-const FundWalletForm = (props: FundWalletProps) => {
+const FundWalletForm = (props: FundWalletFormProps) => {
   const { handleChange, handleSubmit, cardNumber, expiryDate, cvv, amount } =
     props;
 

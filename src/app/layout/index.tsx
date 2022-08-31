@@ -1,4 +1,4 @@
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Dashboard from "../../pages/Dashboard";
 import DroppeXmasAside from "./aside";
 import DroppeXmasContent from "./content";
@@ -14,6 +14,7 @@ export const DroppeXmasLayout = () => {
       <DroppeXmasAside />
       <DroppeXmasContent>
         <Switch>
+          <Redirect exact from="/" to="/dashboard"></Redirect>
           <Route exact path="/dashboard">
             <Dashboard />
           </Route>

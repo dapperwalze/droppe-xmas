@@ -11,7 +11,7 @@ import { walletSelector } from "../../redux/reducers/walletReducer";
 import { setAmountAfterDiscount } from "../../redux/actions/wishlistActions";
 
 const WishLists = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const { carts, hasErrors, isLoading } = useSelector(wishlistsSelector);
   const dispatch = useDispatch();
@@ -27,13 +27,10 @@ const WishLists = () => {
     dispatch(getAllProducts());
   }, [dispatch]);
 
-  const handleCancel = useCallback(
-    (e) => {
-      e.stopPropagation();
-      setIsVisible(false);
-    },
-    [setIsVisible]
-  );
+  const handleCancel = useCallback((e) => {
+    e.stopPropagation();
+    setIsModalVisible(false);
+  }, []);
 
   const handleGetAmount = useCallback(
     (
@@ -75,7 +72,11 @@ const WishLists = () => {
         </>
       );
     return carts?.map((cart: Record<string, any>) => (
-      <WishList key={cart.id} cart={cart} setIsVisible={setIsVisible} />
+      <WishList
+        key={cart.id}
+        cart={cart}
+        setIsModalVisible={setIsModalVisible}
+      />
     ));
   }, [carts, hasErrors, isLoading]);
 
@@ -97,7 +98,7 @@ const WishLists = () => {
           } `}
           messageHeader="Ooops! 😞"
           onCancel={handleCancel}
-          visible={isVisible}
+          visible={isModalVisible}
           handleGetAmount={handleGetAmount}
         />
       ) : (
@@ -105,7 +106,7 @@ const WishLists = () => {
           messageStatus="You've sucessfully approved this wishlist"
           messageHeader="Yay! 🎉"
           onCancel={handleCancel}
-          visible={isVisible}
+          visible={isModalVisible}
           handleGetAmount={handleGetAmount}
         />
       )}

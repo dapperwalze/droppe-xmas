@@ -6,7 +6,7 @@ export const ProductCard = () => {
   return (
     <div className={styles.productCard}>
       <div className={styles.productImage}>
-        <img src={Laptop} alt="product name" />
+        <img src={Laptop} alt="MacBook pro" />
       </div>
       <div className={styles.productCardDetails}>
         <span className={styles.productPrice}>

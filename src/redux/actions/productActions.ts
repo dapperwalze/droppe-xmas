@@ -22,9 +22,8 @@ export const getAllProducts = () => {
     dispatch(getProducts());
 
     try {
-      await axios.get("https://fakestoreapi.com/products").then((response) => {
-        dispatch(getProductsSuccess(response.data));
-      });
+      const response = await axios.get("https://fakestoreapi.com/products");
+      dispatch(getProductsSuccess(response.data));
     } catch (error: any) {
       if (error.response) {
         dispatch(getProductsFailure());

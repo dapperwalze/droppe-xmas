@@ -13,11 +13,11 @@ import { allProductsSelector } from "../../redux/reducers/allProductsReducer";
 
 interface WishListProps {
   cart: Record<string, any>;
-  setIsVisible: (arg: any) => any;
+  setIsModalVisible: (arg: any) => any;
 }
 
 const WishList = (props: WishListProps) => {
-  const { cart, setIsVisible } = props;
+  const { cart, setIsModalVisible } = props;
   const { products, id } = cart;
 
   const { allProducts } = useSelector(allProductsSelector);
@@ -42,11 +42,11 @@ const WishList = (props: WishListProps) => {
   const handleWishlistApproval = (cart: Record<string, any>) => {
     if (walletBalance > amountAfterDiscount && limitPerWishlist > 0) {
       dispatch(saveCart(cart));
-      setIsVisible(true);
+      setIsModalVisible(true);
       handleToggle();
     }
     dispatch(approveWishlistFailure());
-    setIsVisible(true);
+    setIsModalVisible(true);
   };
 
   return (
